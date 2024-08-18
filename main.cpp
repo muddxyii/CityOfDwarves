@@ -5,11 +5,25 @@
 
 int main()
 {
-    Engine engine = Engine(800, 600);
+    Engine engine = Engine("OverheadBuilder" ,800, 600);
 
+    engine.setTargetFPS(60);
     while (!engine.windowShouldClose()) {
-        engine.clearBackground();
+        engine.limitFrameRate();
+
+        // Update logic
+        float dt = engine.getDeltaTime();
+
+        // Clear background for render
+        engine.clearBackground(100, 149, 237);
+
+        // Render objects Here
+        // TODO: ADD OBJECTS TO RENDER
+
+        // Present Render
         engine.presentRender();
+
+        engine.capFrameRate();
     }
 
     return 0;
