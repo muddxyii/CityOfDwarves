@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.29)
-project(OverheadBuilder)
+project(CityOfDwarves)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -10,11 +10,11 @@ find_package(SDL2 REQUIRED)
 
 find_package(glm REQUIRED)
 
-add_executable(OverheadBuilder main.cpp
+add_executable(CityOfDwarves main.cpp
         Engine/Engine.cpp
         Engine/Engine.h
         Engine/Input/Input.cpp
         Engine/Input/Input.h)
 
-target_include_directories(OverheadBuilder PRIVATE ${SDL2_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS})
-target_link_libraries(OverheadBuilder PRIVATE SDL2::SDL2 glm::glm)
+target_include_directories(CityOfDwarves PRIVATE ${SDL2_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS})
+target_link_libraries(CityOfDwarves PRIVATE SDL2::SDL2 glm::glm)

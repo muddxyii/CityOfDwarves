@@ -73,7 +73,7 @@ void Engine::clearBackground() const {
 }
 
 void Engine::clearBackground(const Uint8 r, const Uint8 g, const Uint8 b) const {
-    SDL_SetRenderDrawColor(renderer, r, g, b, 255); // Black background
+    SDL_SetRenderDrawColor(renderer, r, g, b, 255);
     SDL_RenderClear(renderer);
 }
 

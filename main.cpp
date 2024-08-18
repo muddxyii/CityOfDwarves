@@ -5,7 +5,7 @@
 
 int main()
 {
-    Engine engine = Engine("OverheadBuilder" ,800, 600);
+    Engine engine = Engine("City of Dwarves" ,800, 600);
 
     engine.setTargetFPS(60);
     while (!engine.windowShouldClose()) {
