@@ -9,7 +9,6 @@ A 2D dwarf-themed city builder game implemented in C++ using SDL2 and GLM librar
 - [Building](#building)
 - [Usage](#usage)
 - [Controls](#controls)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Description
@@ -63,8 +62,8 @@ After building, run the executable from the build directory:
 ./city_of_dwarves
 ```
 
-## Controls (TO BE IMPLEMENTED)
-
+## Controls
+(TO BE IMPLEMENTED)
 - WASD or Arrow keys: Scroll map
 - Scroll wheel: Zoom in/out
 - ESC: Open/close menu
@@ -72,3 +71,10 @@ After building, run the executable from the build directory:
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- SDL2 developers
+- GLM developers
+- [Mixamo](https://www.mixamo.com/#/) for 3D Models & Animations
+- [Poly Haven](https://polyhaven.com) for Textures
