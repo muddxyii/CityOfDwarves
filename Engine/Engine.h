@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
 #include "Input/Input.h"
+#include "Camera/Camera.h"
 
 struct FrameRateController {
     float targetFPS = 60.0f;
@@ -32,12 +33,15 @@ public:
 
     float getDeltaTime() const;
 
+    void setCurrentCamera(Camera* newCamera);
     void clearBackground() const;
     void clearBackground(Uint8 r, Uint8 g, Uint8 b) const;
+    void drawRect(SDL_Rect rectToDraw) const;
     void presentRender() const;
 private:
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
+    Camera* camera = nullptr;
     Input input = Input();
     glm::vec2 windowSize = glm::vec2(800, 600);
     FrameRateController frameRateController = {};

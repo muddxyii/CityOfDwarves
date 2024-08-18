@@ -14,7 +14,9 @@ add_executable(CityOfDwarves main.cpp
         Engine/Engine.cpp
         Engine/Engine.h
         Engine/Input/Input.cpp
-        Engine/Input/Input.h)
+        Engine/Input/Input.h
+        Engine/Camera/Camera.cpp
+        Engine/Camera/Camera.h)
 
 target_include_directories(CityOfDwarves PRIVATE ${SDL2_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS})
 target_link_libraries(CityOfDwarves PRIVATE SDL2::SDL2 glm::glm)

@@ -67,6 +67,10 @@ float Engine::getDeltaTime() const {
     return static_cast<float>(frameRateController.frameTime) / 1000.0f;
 }
 
+void Engine::setCurrentCamera(Camera* newCamera) {
+    camera = newCamera;
+}
+
 void Engine::clearBackground() const {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Black background
     SDL_RenderClear(renderer);
@@ -75,6 +79,15 @@ void Engine::clearBackground() const {
 void Engine::clearBackground(const Uint8 r, const Uint8 g, const Uint8 b) const {
     SDL_SetRenderDrawColor(renderer, r, g, b, 255);
     SDL_RenderClear(renderer);
+}
+
+void Engine::drawRect(SDL_Rect rectToDraw) const {
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // white
+    if (camera) {
+        rectToDraw.x -= static_cast<int>(camera->getPosition().x);
+        rectToDraw.y -= static_cast<int>(camera->getPosition().y);
+    }
+    SDL_RenderFillRect(renderer, &rectToDraw);
 }
 
 void Engine::presentRender() const {
