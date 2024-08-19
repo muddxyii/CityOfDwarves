@@ -17,7 +17,9 @@ add_executable(CityOfDwarves main.cpp
         Engine/Input/Input.cpp
         Engine/Input/Input.h
         Engine/Camera/Camera.cpp
-        Engine/Camera/Camera.h)
+        Engine/Camera/Camera.h
+        Game/Tile/Tile.cpp
+        Game/Tile/Tile.h)
 
 target_include_directories(CityOfDwarves PRIVATE
         ${SDL2_INCLUDE_DIRS}
