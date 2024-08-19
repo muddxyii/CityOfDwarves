@@ -7,6 +7,7 @@ if(APPLE)
     set(SDL2_DIR "/opt/homebrew/lib/cmake/SDL2")
 endif()
 find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
 
 find_package(glm REQUIRED)
 
@@ -18,5 +19,13 @@ add_executable(CityOfDwarves main.cpp
         Engine/Camera/Camera.cpp
         Engine/Camera/Camera.h)
 
-target_include_directories(CityOfDwarves PRIVATE ${SDL2_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS})
-target_link_libraries(CityOfDwarves PRIVATE SDL2::SDL2 glm::glm)
+target_include_directories(CityOfDwarves PRIVATE
+        ${SDL2_INCLUDE_DIRS}
+        ${SDL2_IMAGE_INCLUDE_DIRS}
+        ${GLM_INCLUDE_DIRS}
+)
+target_link_libraries(CityOfDwarves PRIVATE
+        SDL2::SDL2
+        SDL2_image::SDL2_image
+        glm::glm
+)

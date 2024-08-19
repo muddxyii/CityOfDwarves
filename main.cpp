@@ -9,6 +9,8 @@ int main()
     Engine engine = Engine("City of Dwarves" ,800, 600);
     Camera camera = Camera();
 
+    int grassId = engine.loadTexture("assets/environment/grass.png");
+
     engine.setCurrentCamera(&camera);
     engine.setTargetFPS(60);
     while (!engine.windowShouldClose()) {
@@ -40,8 +42,8 @@ int main()
         // TODO: ADD OBJECTS TO RENDER
         constexpr SDL_Rect rect = {0, 0, 200, 200};
         constexpr SDL_Rect rect2 = {400, 400, 200, 200};
-        engine.drawRect(rect);
-        engine.drawRect(rect2);
+        engine.drawTextureRect(rect, grassId);
+        engine.drawTextureRect(rect2, grassId);
 
         // Present Render
         engine.presentRender();

@@ -9,20 +9,28 @@ Engine::Engine(const std::string &windowTitle, int windowWidth, int windowHeight
     windowSize.y = static_cast<float>(windowHeight);
 
     if (SDL_Init(SDL_INIT_VIDEO)) {
-        SDL_Log("SDL_Init failed: %s", SDL_GetError());
+        SDL_Log("SDL_Init failed: %s\n", SDL_GetError());
         exit(1);
     }
 
     window = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               windowWidth, windowHeight, SDL_WINDOW_SHOWN);
     if (!window) {
-        SDL_Log("SDL_CreateWindow failed: %s", SDL_GetError());
+        SDL_Log("SDL_CreateWindow failed: %s\n", SDL_GetError());
         exit(1);
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) {
-        SDL_Log("SDL_CreateRenderer failed: %s", SDL_GetError());
+        SDL_Log("SDL_CreateRenderer failed: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    // Init SDL2_image
+    constexpr int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+        // Handle SDL2_image initialization error
+        SDL_Log("SDL2_image could not initialize! SDL2_image Error: %s\n", IMG_GetError());
         exit(1);
     }
 }
@@ -36,6 +44,11 @@ Engine::~Engine() {
         SDL_DestroyWindow(window);
         window = nullptr;
     }
+    for (const auto& pair : textureManager.textures) {
+        SDL_DestroyTexture(pair.second);
+    }
+    textureManager.textures.clear();
+    IMG_Quit();
     SDL_Quit();
 }
 
@@ -81,6 +94,18 @@ void Engine::clearBackground(const Uint8 r, const Uint8 g, const Uint8 b) const 
     SDL_RenderClear(renderer);
 }
 
+int Engine::loadTexture(const std::string &path) {
+    SDL_Texture* newTexture = IMG_LoadTexture(renderer, path.c_str());
+    if (newTexture == nullptr) {
+        SDL_Log("Unable to load image %s! SDL2_image Error: %s\n", path.c_str(), IMG_GetError());
+        return -1;
+    }
+
+    const int textureId = textureManager.nextTextureId++;
+    textureManager.textures[textureId] = newTexture;
+    return textureId;
+}
+
 void Engine::drawRect(SDL_Rect rectToDraw) const {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // white
     if (camera) {
@@ -88,6 +113,19 @@ void Engine::drawRect(SDL_Rect rectToDraw) const {
         rectToDraw.y -= static_cast<int>(camera->getPosition().y);
     }
     SDL_RenderFillRect(renderer, &rectToDraw);
+}
+
+void Engine::drawTextureRect(SDL_Rect destRect, int textureId) const {
+    const auto iterator = textureManager.textures.find(textureId);
+    if (iterator == textureManager.textures.end()) {
+        SDL_Log("Texture does not exist: %s\n", SDL_GetError());
+        return;
+    }
+    if (camera) {
+        destRect.x -= static_cast<int>(camera->getPosition().x);
+        destRect.y -= static_cast<int>(camera->getPosition().y);
+    }
+    SDL_RenderCopy(renderer, iterator->second, nullptr, &destRect);
 }
 
 void Engine::presentRender() const {
