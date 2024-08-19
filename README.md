@@ -30,7 +30,7 @@ A 2D dwarf-themed city builder game implemented in C++ using SDL2 and GLM librar
 To build and run this project, you'll need:
 
 - C++20 compatible compiler
-- SDL2 library
+- SDL2, SDL2_image libraries
 - GLM library
 - CMake (version 3.29 or higher)
 
