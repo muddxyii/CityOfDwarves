@@ -46,8 +46,10 @@ public:
     void clearBackground(Uint8 r, Uint8 g, Uint8 b) const;
 
     int loadTexture(const std::string& path);
+    bool unloadTexture(int textureId);
     void drawRect(SDL_Rect rectToDraw) const;
     void drawTextureRect(SDL_Rect destRect, int textureId) const;
+    void drawTextureRectPro(SDL_Rect srcRect, SDL_Rect destRect, int textureId) const;
 
     void presentRender() const;
 private:

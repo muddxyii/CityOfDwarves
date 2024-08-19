@@ -106,6 +106,20 @@ int Engine::loadTexture(const std::string &path) {
     return textureId;
 }
 
+bool Engine::unloadTexture(const int textureId) {
+    auto iterator = textureManager.textures.find(textureId);
+    if (iterator == textureManager.textures.end()) {
+        SDL_Log("Texture with ID %d does not exist", textureId);
+        return false;
+    }
+
+    SDL_DestroyTexture(iterator->second);
+    textureManager.textures.erase(iterator);
+
+    SDL_Log("Texture with ID %d successfully unloaded", textureId);
+    return true;
+}
+
 void Engine::drawRect(SDL_Rect rectToDraw) const {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // white
     if (camera) {
@@ -116,6 +130,19 @@ void Engine::drawRect(SDL_Rect rectToDraw) const {
 }
 
 void Engine::drawTextureRect(SDL_Rect destRect, int textureId) const {
+    const auto iterator = textureManager.textures.find(textureId);
+    if (iterator == textureManager.textures.end()) {
+        SDL_Log("Texture does not exist: %s\n", SDL_GetError());
+        return;
+    }
+    if (camera) {
+        destRect.x -= static_cast<int>(camera->getPosition().x);
+        destRect.y -= static_cast<int>(camera->getPosition().y);
+    }
+    SDL_RenderCopy(renderer, iterator->second, nullptr, &destRect);
+}
+
+void Engine::drawTextureRectPro(SDL_Rect srcRect, SDL_Rect destRect, int textureId) const {
     const auto iterator = textureManager.textures.find(textureId);
     if (iterator == textureManager.textures.end()) {
         SDL_Log("Texture does not exist: %s\n", SDL_GetError());
