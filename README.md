@@ -18,12 +18,10 @@ A 2D dwarf-themed city builder game implemented in C++ using SDL2 and GLM librar
 ## Features
 
 - 2D graphics rendering using SDL2
-- Efficient math operations with GLM
-- Underground cavern grid system for building placement
-- Various dwarven structures (living quarters, workshops, mines, taverns)
-- Resource management (population, gold, ore, food)
-- Day/night cycle (affects dwarven productivity)
-- Basic AI for dwarf behavior and needs
+- Grid system for building placement
+- ~Various dwarven structures (living quarters, workshops, mines, taverns)~ (not yet)
+- ~Resource management (population, gold, ore, food)~ (not yet)
+- ~Basic AI for dwarf behavior and needs~ (not yet)
 
 ## Prerequisites
 
@@ -63,10 +61,8 @@ After building, run the executable from the build directory:
 ```
 
 ## Controls
-(TO BE IMPLEMENTED)
 - WASD or Arrow keys: Scroll map
-- Scroll wheel: Zoom in/out
-- ESC: Open/close menu
+- ESC: Open/close game ~menu~
 
 ## License
 
