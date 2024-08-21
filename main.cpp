@@ -14,7 +14,7 @@ struct GameScene {
     int grassId = -1;
     int treeId = -1;
     std::vector<std::vector<std::unique_ptr<Tile>>> tiles;
-    glm::vec2 gridSize{12.0f, 8.0f};
+    glm::vec2 gridSize{12.0f, 12.0f};
     const float TREE_PROBABILITY = 0.2f;
 };
 
@@ -64,6 +64,15 @@ void InitScene(GameScene &gameScene) {
 
     // Generate the map
     GenerateMap(gameScene);
+
+    // Lock Camera to map
+    SDL_Rect gameArea = {
+        0, // x position
+        0, // y position
+        static_cast<int>(gameScene.gridSize.x * 128), // width
+        static_cast<int>(gameScene.gridSize.y * 128)  // height
+    };
+    gameScene.camera.setLockBox(gameArea);
 }
 
 void GenerateMap(GameScene &gameScene) {
