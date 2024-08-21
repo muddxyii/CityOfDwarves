@@ -1,2 +1,11 @@
 /cmake-build-debug/
 /.idea/
+/.ninja_deps
+/CMakeFiles/
+/.cmake/
+/.ninja_log
+/build.ninja
+/CityOfDwarves
+/Testing/Temporary/LastTest.log
+/CMakeCache.txt
+/cmake_install.cmake
